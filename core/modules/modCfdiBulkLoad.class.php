@@ -2,7 +2,7 @@
 /* Copyright (C) 2004-2018  Laurent Destailleur     <eldy@users.sourceforge.net>
  * Copyright (C) 2018-2019  Nicolas ZABOURI         <info@inovea-conseil.com>
  * Copyright (C) 2019-2020  Frédéric France         <frederic.france@netlogic.fr>
- * Copyright (C) 2020 SuperAdmin
+ * Copyright (C) 2020		Alfredo Altamirano		<alfredo.altamirano@tisinproblemas.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
  *  \ingroup    cfdibulkload
  *  \brief      Description and activation file for module CfdiBulkLoad
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT . '/core/modules/DolibarrModules.class.php';
 
 /**
  *  Description and activation class for module CfdiBulkLoad
@@ -45,12 +45,12 @@ class modCfdiBulkLoad extends DolibarrModules
 
 		// Id for module (must be unique).
 		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
-		$this->numero = 500000; // TODO Go on page https://wiki.dolibarr.org/index.php/List_of_modules_id to reserve an id number for your module
+		$this->numero = 181010; // TODO Go on page https://wiki.dolibarr.org/index.php/List_of_modules_id to reserve an id number for your module
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'cfdibulkload';
 		// Family can be 'base' (core modules),'crm','financial','hr','projects','products','ecm','technic' (transverse modules),'interface' (link with external tools),'other','...'
 		// It is used to group modules by family in module setup page
-		$this->family = "other";
+		$this->family = 'financial';
 		// Module position in the family on 2 digits ('01', '10', '20', ...)
 		$this->module_position = '90';
 		// Gives the possibility for the module, to provide his own family info and position of this family (Overwrite $this->family and $this->module_position. Avoid this)
@@ -61,19 +61,19 @@ class modCfdiBulkLoad extends DolibarrModules
 		$this->description = "CfdiBulkLoadDescription";
 		// Used only if file README.md and README-LL.md not found.
 		$this->descriptionlong = "CfdiBulkLoad description (Long)";
-		$this->editor_name = 'Editor name';
-		$this->editor_url = 'https://www.example.com';
+		$this->editor_name = 'TI Sin Problemas';
+		$this->editor_url = 'https://www.tisinproblemas.com';
 		// Possible values for version are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated' or a version string like 'x.y.z'
 		$this->version = '1.0';
 		// Url to the file with your last numberversion of this module
 		//$this->url_last_version = 'http://www.example.com/versionmodule.txt';
 
 		// Key used in llx_const table to save module status enabled/disabled (where CFDIBULKLOAD is value of property name of module in uppercase)
-		$this->const_name = 'MAIN_MODULE_'.strtoupper($this->name);
+		$this->const_name = 'MAIN_MODULE_' . strtoupper($this->name);
 		// Name of image file used for this module.
 		// If file is in theme/yourtheme/img directory under name object_pictovalue.png, use this->picto='pictovalue'
 		// If file is in module/img directory under name object_pictovalue.png, use this->picto='pictovalue@module'
-		$this->picto = 'generic';
+		$this->picto = 'invoice';
 		// Define some features supported by module (triggers, login, substitutions, menus, css, etc...)
 		$this->module_parts = array(
 			// Set this to 1 if module has its own trigger directory (core/triggers)
@@ -120,7 +120,7 @@ class modCfdiBulkLoad extends DolibarrModules
 		// A condition to hide module
 		$this->hidden = false;
 		// List of module class names as string that must be enabled if this module is enabled. Example: array('always1'=>'modModuleToEnable1','always2'=>'modModuleToEnable2', 'FR1'=>'modModuleToEnableFR'...)
-		$this->depends = array();
+		$this->depends = array('always1' => 'modSociete', 'always2' => 'modFacture', 'always3' => 'modFournisseur');
 		$this->requiredby = array(); // List of module class names as string to disable if this one is disabled. Example: array('modModuleToDisable1', ...)
 		$this->conflictwith = array(); // List of module class names as string this module is in conflict with. Example: array('modModuleToDisable1', ...)
 		$this->langfiles = array("cfdibulkload@cfdibulkload");
@@ -265,18 +265,18 @@ class modCfdiBulkLoad extends DolibarrModules
 		// Add here entries to declare new menus
 		/* BEGIN MODULEBUILDER TOPMENU */
 		$this->menu[$r++] = array(
-			'fk_menu'=>'', // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
-			'type'=>'top', // This is a Top menu entry
-			'titre'=>'ModuleCfdiBulkLoadName',
-			'mainmenu'=>'cfdibulkload',
-			'leftmenu'=>'',
-			'url'=>'/cfdibulkload/cfdibulkloadindex.php',
-			'langs'=>'cfdibulkload@cfdibulkload', // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
-			'position'=>1000 + $r,
-			'enabled'=>'$conf->cfdibulkload->enabled', // Define condition to show or hide menu entry. Use '$conf->cfdibulkload->enabled' if entry must be visible if module is enabled.
-			'perms'=>'1', // Use 'perms'=>'$user->rights->cfdibulkload->myobject->read' if you want your menu with a permission rules
-			'target'=>'',
-			'user'=>2, // 0=Menu for internal users, 1=external users, 2=both
+			'fk_menu' => '', // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
+			'type' => 'top', // This is a Top menu entry
+			'titre' => 'ModuleCfdiBulkLoadName',
+			'mainmenu' => 'cfdibulkload',
+			'leftmenu' => '',
+			'url' => '/cfdibulkload/cfdibulkloadindex.php',
+			'langs' => 'cfdibulkload@cfdibulkload', // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
+			'position' => 1000 + $r,
+			'enabled' => '$conf->cfdibulkload->enabled', // Define condition to show or hide menu entry. Use '$conf->cfdibulkload->enabled' if entry must be visible if module is enabled.
+			'perms' => '1', // Use 'perms'=>'$user->rights->cfdibulkload->myobject->read' if you want your menu with a permission rules
+			'target' => '',
+			'user' => 0, // 0=Menu for internal users, 1=external users, 2=both
 		);
 		/* END MODULEBUILDER TOPMENU */
 		/* BEGIN MODULEBUILDER LEFTMENU MYOBJECT
@@ -408,33 +408,31 @@ class modCfdiBulkLoad extends DolibarrModules
 		// Document templates
 		$moduledir = 'cfdibulkload';
 		$myTmpObjects = array();
-		$myTmpObjects['MyObject']=array('includerefgeneration'=>0, 'includedocgeneration'=>0);
+		$myTmpObjects['MyObject'] = array('includerefgeneration' => 0, 'includedocgeneration' => 0);
 
 		foreach ($myTmpObjects as $myTmpObjectKey => $myTmpObjectArray) {
 			if ($myTmpObjectKey == 'MyObject') continue;
 			if ($myTmpObjectArray['includerefgeneration']) {
-				$src=DOL_DOCUMENT_ROOT.'/install/doctemplates/cfdibulkload/template_myobjects.odt';
-				$dirodt=DOL_DATA_ROOT.'/doctemplates/cfdibulkload';
-				$dest=$dirodt.'/template_myobjects.odt';
+				$src = DOL_DOCUMENT_ROOT . '/install/doctemplates/cfdibulkload/template_myobjects.odt';
+				$dirodt = DOL_DATA_ROOT . '/doctemplates/cfdibulkload';
+				$dest = $dirodt . '/template_myobjects.odt';
 
-				if (file_exists($src) && ! file_exists($dest))
-				{
-					require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
+				if (file_exists($src) && !file_exists($dest)) {
+					require_once DOL_DOCUMENT_ROOT . '/core/lib/files.lib.php';
 					dol_mkdir($dirodt);
-					$result=dol_copy($src, $dest, 0, 0);
-					if ($result < 0)
-					{
+					$result = dol_copy($src, $dest, 0, 0);
+					if ($result < 0) {
 						$langs->load("errors");
-						$this->error=$langs->trans('ErrorFailToCopyFile', $src, $dest);
+						$this->error = $langs->trans('ErrorFailToCopyFile', $src, $dest);
 						return 0;
 					}
 				}
 
 				$sql = array_merge($sql, array(
-					"DELETE FROM ".MAIN_DB_PREFIX."document_model WHERE nom = 'standard_".strtolower($myTmpObjectKey)."' AND type = '".strtolower($myTmpObjectKey)."' AND entity = ".$conf->entity,
-					"INSERT INTO ".MAIN_DB_PREFIX."document_model (nom, type, entity) VALUES('standard_".strtolower($myTmpObjectKey)."','".strtolower($myTmpObjectKey)."',".$conf->entity.")",
-					"DELETE FROM ".MAIN_DB_PREFIX."document_model WHERE nom = 'generic_".strtolower($myTmpObjectKey)."_odt' AND type = '".strtolower($myTmpObjectKey)."' AND entity = ".$conf->entity,
-					"INSERT INTO ".MAIN_DB_PREFIX."document_model (nom, type, entity) VALUES('generic_".strtolower($myTmpObjectKey)."_odt', '".strtolower($myTmpObjectKey)."', ".$conf->entity.")"
+					"DELETE FROM " . MAIN_DB_PREFIX . "document_model WHERE nom = 'standard_" . strtolower($myTmpObjectKey) . "' AND type = '" . strtolower($myTmpObjectKey) . "' AND entity = " . $conf->entity,
+					"INSERT INTO " . MAIN_DB_PREFIX . "document_model (nom, type, entity) VALUES('standard_" . strtolower($myTmpObjectKey) . "','" . strtolower($myTmpObjectKey) . "'," . $conf->entity . ")",
+					"DELETE FROM " . MAIN_DB_PREFIX . "document_model WHERE nom = 'generic_" . strtolower($myTmpObjectKey) . "_odt' AND type = '" . strtolower($myTmpObjectKey) . "' AND entity = " . $conf->entity,
+					"INSERT INTO " . MAIN_DB_PREFIX . "document_model (nom, type, entity) VALUES('generic_" . strtolower($myTmpObjectKey) . "_odt', '" . strtolower($myTmpObjectKey) . "', " . $conf->entity . ")"
 				));
 			}
 		}
