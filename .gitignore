@@ -1,6 +1,18 @@
-composer.phar
-/vendor/
-
-# Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
-# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
-# composer.lock
+# Generated binaries
+/build/*.zip
+# Doxygen generated documentation
+/build/doxygen/doxygen_warnings.log
+/doc/code/doxygen
+# Composer managed dependencies
+/vendor
+/dev/bin
+# PHPdocumentor generated files
+/build/phpdoc
+/doc/code/phpdoc
+# Sphinx generated files
+/doc/user/build
+/.settings/
+/.buildpath
+/.project
+# Other
+*.back
