@@ -1,0 +1,5 @@
+{
+    "require": {
+        "phpcfdi/sat-ws-descarga-masiva": "^0.3.2"
+    }
+}

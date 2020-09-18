@@ -1,0 +1,235 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "af3d5686822ff161952b966d5e4d3b9b",
+    "packages": [
+        {
+            "name": "eclipxe/enum",
+            "version": "v0.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eclipxe13/enum.git",
+                "reference": "08048fe76ea01be059d49757e832f460de53b342"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eclipxe13/enum/zipball/08048fe76ea01be059d49757e832f460de53b342",
+                "reference": "08048fe76ea01be059d49757e832f460de53b342",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.4",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^8.0",
+                "psalm/phar": "^3.7",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Eclipxe\\Enum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Carlos C Soto",
+                    "email": "eclipxe13@gmail.com",
+                    "homepage": "http://eclipxe.com.mx/"
+                }
+            ],
+            "description": "Enum based on the Brent Roose enum idea https://stitcher.io/blog/php-enums",
+            "homepage": "https://github.com/eclipxe13/enum",
+            "keywords": [
+                "enum",
+                "reflection"
+            ],
+            "time": "2020-01-09T17:54:47+00:00"
+        },
+        {
+            "name": "eclipxe/micro-catalog",
+            "version": "v0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eclipxe13/micro-catalog.git",
+                "reference": "df0bd24b490b1b82f00caef47462e7dc62be8f79"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eclipxe13/micro-catalog/zipball/df0bd24b490b1b82f00caef47462e7dc62be8f79",
+                "reference": "df0bd24b490b1b82f00caef47462e7dc62be8f79",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Eclipxe\\MicroCatalog\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Carlos C Soto",
+                    "email": "eclipxe13@gmail.com",
+                    "homepage": "http://eclipxe.com.mx/"
+                }
+            ],
+            "description": "Micro catalog template class, useful to create value objects based on a known small catalog",
+            "homepage": "https://github.com/eclipxe13/micro-catalog",
+            "keywords": [
+                "catalog",
+                "generic"
+            ],
+            "time": "2020-01-13T15:55:12+00:00"
+        },
+        {
+            "name": "phpcfdi/credentials",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpcfdi/credentials.git",
+                "reference": "5e1f391ad1643b8d4cf6306425fc4bf0d2b2b336"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpcfdi/credentials/zipball/5e1f391ad1643b8d4cf6306425fc4bf0d2b2b336",
+                "reference": "5e1f391ad1643b8d4cf6306425fc4bf0d2b2b336",
+                "shasum": ""
+            },
+            "require": {
+                "eclipxe/enum": "^0.2.0",
+                "ext-mbstring": "*",
+                "ext-openssl": "*",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "friendsofphp/php-cs-fixer": "^2.4",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^8.4",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpCfdi\\Credentials\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "phpCfdi",
+                    "email": "contact@phpcfdi.com",
+                    "homepage": "https://www.phpcfdi.com/"
+                }
+            ],
+            "description": "Library to use eFirma (fiel) and CSD (sellos) from SAT",
+            "homepage": "https://github.com/phpcfdi/credentials",
+            "keywords": [
+                "certificado",
+                "cfdi",
+                "efirma",
+                "fiel",
+                "sat",
+                "sello"
+            ],
+            "time": "2020-01-23T16:00:32+00:00"
+        },
+        {
+            "name": "phpcfdi/sat-ws-descarga-masiva",
+            "version": "v0.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpcfdi/sat-ws-descarga-masiva.git",
+                "reference": "e6087d9b1d1d7eaf2e91db11246150f4b635fc43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpcfdi/sat-ws-descarga-masiva/zipball/e6087d9b1d1d7eaf2e91db11246150f4b635fc43",
+                "reference": "e6087d9b1d1d7eaf2e91db11246150f4b635fc43",
+                "shasum": ""
+            },
+            "require": {
+                "eclipxe/enum": "^0.2.0",
+                "eclipxe/micro-catalog": "^0.1.2",
+                "ext-dom": "*",
+                "ext-json": "*",
+                "ext-openssl": "*",
+                "ext-zip": "*",
+                "php": ">=7.3",
+                "phpcfdi/credentials": "^1.1"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.4",
+                "guzzlehttp/guzzle": "^6.3",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^9.1",
+                "robrichards/xmlseclibs": "^3.0.4",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "To use GuzzleWebClient implementation"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpCfdi\\SatWsDescargaMasiva\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cesar Aguilera",
+                    "email": "cesargnu29@gmail.com"
+                },
+                {
+                    "name": "Carlos C Soto",
+                    "email": "eclipxe13@gmail.com"
+                }
+            ],
+            "description": "Librería para usar el servicio web del SAT de Descarga Masiva",
+            "homepage": "https://github.com/phpcfdi/sat-ws-descarga-masiva",
+            "keywords": [
+                "cfdi",
+                "descarga",
+                "download",
+                "sat",
+                "webservice"
+            ],
+            "time": "2020-07-29T04:47:35+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
+}
