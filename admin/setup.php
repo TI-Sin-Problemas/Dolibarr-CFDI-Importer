@@ -64,19 +64,36 @@ $backtopage = GETPOST('backtopage', 'alpha');
 $value = GETPOST('value', 'alpha');
 
 $arrayofparameters = array(
-	'CFDIBULKLOAD_MYPARAM1'=>array('css'=>'minwidth200', 'enabled'=>1),
-	'CFDIBULKLOAD_MYPARAM2'=>array('css'=>'minwidth500', 'enabled'=>1)
+	'CFDIBULKLOAD_PASSWORD' => array('css' => '', 'enabled' => 1, 'input_type' => 'password'),
 );
 
 $error = 0;
 $setupnotempty = 0;
 
 
+// Local variables
+$encryption_method = $conf->global->CFDIBULKLOAD_ENCRYPTION_METHOD;
+$encryption_key = $conf->file->instance_unique_id;
+$encryption_iv = hex2bin($conf->global->CFDIBULKLOAD_ENCRYPTION_IV);
+
 /*
  * Actions
  */
 
 if ((float) DOL_VERSION >= 6) {
+
+	// Encrypt value of password fields
+	if ($action == 'update' && is_array($arrayofparameters)) {
+
+		// Check for parameters marked as password
+		foreach ($arrayofparameters as $parameter => $parameter_value) {
+			if (GETPOSTISSET($parameter) && $parameter_value['input_type'] == 'password') {
+				$password = openssl_encrypt(GETPOST($parameter), $encryption_method, $encryption_key, 0, $encryption_iv);
+				$_POST[$parameter] = $password;
+			}
+		}
+	}
+
 	include DOL_DOCUMENT_ROOT . '/core/actions_setmoduleoptions.inc.php';
 }
 
@@ -203,10 +220,15 @@ if ($action == 'edit') {
 	print '<tr class="liste_titre"><td class="titlefield">' . $langs->trans("Parameter") . '</td><td>' . $langs->trans("Value") . '</td></tr>';
 
 	foreach ($arrayofparameters as $key => $val) {
-		print '<tr class="oddeven"><td>';
+		$setupnotempty++;
 		$tooltiphelp = (($langs->trans($key . 'Tooltip') != $key . 'Tooltip') ? $langs->trans($key . 'Tooltip') : '');
-		print $form->textwithpicto($langs->trans($key), $tooltiphelp);
-		print '</td><td><input name="' . $key . '"  class="flat ' . (empty($val['css']) ? 'minwidth200' : $val['css']) . '" value="' . $conf->global->$key . '"></td></tr>';
+		$input_type = $val['input_type'];
+		$input_type_attr = (!empty($input_type)) ? 'type="' . $input_type . '"' : '';
+
+		echo '<tr class="oddeven">';
+		echo '<td>' . $form->textwithpicto($langs->trans($key), $tooltiphelp) . '</td>';
+		echo '<td><input ' . $input_type_attr . ' name="' . $key .  '" class="flat ' . (empty($val['css']) ? 'minwidth200' : $val['css']) . '" value="' . (($input_type == 'password') ? '' : $conf->global->$key) . '"></td>';
+		echo '</tr>';
 	}
 	print '</table>';
 
@@ -223,11 +245,19 @@ if ($action == 'edit') {
 
 		foreach ($arrayofparameters as $key => $val) {
 			$setupnotempty++;
+			$tooltiphelp = (($langs->trans($key . 'Tooltip') != $key . 'Tooltip') ? $langs->trans($key . 'Tooltip') : '');
+			$input_type = $val['input_type'];
+
+			if ($input_type == 'password') {
+				$decrypted_password = openssl_decrypt($conf->global->$key, $encryption_method, $encryption_key, 0, $encryption_iv);
+				$field_value = str_repeat('*', strlen($decrypted_password));
+			} else {
+				$field_value = $conf->global->$key;
+			}
 
 			print '<tr class="oddeven"><td>';
-			$tooltiphelp = (($langs->trans($key . 'Tooltip') != $key . 'Tooltip') ? $langs->trans($key . 'Tooltip') : '');
 			print $form->textwithpicto($langs->trans($key), $tooltiphelp);
-			print '</td><td>' . $conf->global->$key . '</td></tr>';
+			print '</td><td>' . $field_value . '</td></tr>';
 		}
 
 		print '</table>';

@@ -136,7 +136,13 @@ class modCfdiBulkLoad extends DolibarrModules
 		// Example: $this->const=array(1 => array('CFDIBULKLOAD_MYNEWCONST1', 'chaine', 'myvalue', 'This is a constant to add', 1),
 		//                             2 => array('CFDIBULKLOAD_MYNEWCONST2', 'chaine', 'myvalue', 'This is another constant to add', 0, 'current', 1)
 		// );
-		$this->const = array();
+		$encryption_method = 'aes256';
+		$encryption_iv_len = openssl_cipher_iv_length($encryption_method);
+		$encryption_iv = bin2hex(openssl_random_pseudo_bytes($encryption_iv_len));
+		$this->const = array(
+			['CFDIBULKLOAD_ENCRYPTION_METHOD', 'string', $encryption_method],
+			['CFDIBULKLOAD_ENCRYPTION_IV', 'string', $encryption_iv, 'Encryption initial vector', 0, 'current', 1],
+		);
 
 		// Some keys to add into the overwriting translation tables
 		/*$this->overwrite_translation = array(
