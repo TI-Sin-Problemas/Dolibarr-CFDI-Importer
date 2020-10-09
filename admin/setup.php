@@ -48,6 +48,8 @@ global $langs, $user;
 require_once DOL_DOCUMENT_ROOT . "/core/lib/admin.lib.php";
 require_once '../lib/cfdibulkload.lib.php';
 //require_once "../class/myclass.class.php";
+require_once DOL_DOCUMENT_ROOT . '/core/class/html.formfile.class.php';
+require_once DOL_DOCUMENT_ROOT . '/core/lib/files.lib.php';
 
 // Translations
 $langs->loadLangs(array("admin", "cfdibulkload@cfdibulkload"));
