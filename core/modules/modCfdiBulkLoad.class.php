@@ -113,7 +113,7 @@ class modCfdiBulkLoad extends DolibarrModules
 		);
 		// Data directories to create when module is enabled.
 		// Example: this->dirs = array("/cfdibulkload/temp","/cfdibulkload/subdir");
-		$this->dirs = array("/cfdibulkload/temp");
+		$this->dirs = array("/cfdibulkload/temp", "/cfdibulkload/cert");
 		// Config pages. Put here list of php page, stored into cfdibulkload/admin directory, to use to setup module.
 		$this->config_page_url = array("setup.php@cfdibulkload");
 		// Dependencies

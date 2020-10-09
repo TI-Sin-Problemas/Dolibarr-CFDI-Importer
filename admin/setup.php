@@ -70,6 +70,7 @@ $arrayofparameters = array(
 $error = 0;
 $setupnotempty = 0;
 
+$upload_dir = DOL_DATA_ROOT . '/cfdibulkload/admin/cert';
 
 // Local variables
 $encryption_method = $conf->global->CFDIBULKLOAD_ENCRYPTION_METHOD;
@@ -185,13 +186,23 @@ elseif ($action == 'setdoc') {
 	dolibarr_set_const($db, $constforval, $value, 'chaine', 0, '', $conf->entity);
 }
 
+// Delete files
+elseif ($action == 'delete') {
+	$file = DOL_DATA_ROOT . '/cfdibulkload/' . GETPOST('urlfile', 'alpha');
+	dol_delete_file($file);
+}
 
+// Upload certificate files
+elseif (GETPOST('sendit')) {
+	dol_add_file_process($upload_dir, 1, 0, 'userfile');
+}
 
 /*
  * View
  */
 
 $form = new Form($db);
+$formFile = new FormFile($db);
 
 $dirmodels = array_merge(array('/'), (array) $conf->modules_parts['models']);
 
@@ -265,6 +276,42 @@ if ($action == 'edit') {
 		print '<div class="tabsAction">';
 		print '<a class="butAction" href="' . $_SERVER["PHP_SELF"] . '?action=edit">' . $langs->trans("Modify") . '</a>';
 		print '</div>';
+
+		// Show list of files
+		$filearray = dol_dir_list($upload_dir, 'all', 0, '', null, 'name', SORT_ASC, 1);
+		$formFile->list_of_documents($filearray, null, $module, '', 0, 'admin/cert/', 1, 0, '', 0, $langs->trans('ElectronicSignatureFiles'), '', 0, 0, $upload_dir);
+
+		// Dont show upload form if .key & .cer files were already uploaded
+		if (count($filearray) < 2) {
+
+			// Accept just the file extensions that are not already present on the server
+			$valid_extensions = ['.cer', '.key'];
+			foreach ($filearray as $file) {
+				foreach ($valid_extensions as $index => $extension) {
+					if (strpos($file['name'], $extension) !== false) {
+						array_splice($valid_extensions, $index, 1);
+					};
+				}
+			}
+
+
+			// File upload form
+			$formFile->form_attach_new_file(
+				$_SERVER["PHP_SELF"],
+				$langs->trans('UPLOAD_FIEL_FILES'),
+				0,
+				0,
+				1,
+				50,
+				'',
+				'',
+				1,
+				'',
+				0,
+				'formuserfile',
+				implode(',', $valid_extensions)
+			);
+		}
 	} else {
 		print '<br>' . $langs->trans("NothingToSetup");
 	}
