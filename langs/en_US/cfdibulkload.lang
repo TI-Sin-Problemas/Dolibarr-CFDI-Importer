@@ -1,4 +1,4 @@
-# Copyright (C) 2020 SuperAdmin
+# Copyright (C) 2020 Alfredo Altamirano <alfredo.altamirano@tisinproblemas.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,21 +18,20 @@
 #
 
 # Module label 'ModuleCfdiBulkLoadName'
-ModuleCfdiBulkLoadName = CfdiBulkLoad
+ModuleCfdiBulkLoadName = CFDI Importer
 # Module description 'ModuleCfdiBulkLoadDesc'
-ModuleCfdiBulkLoadDesc = CfdiBulkLoad description
+ModuleCfdiBulkLoadDesc = CFDI Importer allows you to import Online Digital Tax Receipts (CFDI) into Dolibarr from the Mexican Tax Administration Service (SAT) and automatically create Supplier Invoices from the imported documents
 
 #
-# Admin page
+# Setup page
 #
-CfdiBulkLoadSetup = CfdiBulkLoad setup
+CfdiImporterSetup = CFDI Importer setup
 Settings = Settings
-CfdiBulkLoadSetupPage = CfdiBulkLoad setup page
-CFDIBULKLOAD_MYPARAM1 = My param 1
-CFDIBULKLOAD_MYPARAM1Tooltip = My param 1 tooltip
-CFDIBULKLOAD_MYPARAM2=My param 2
-CFDIBULKLOAD_MYPARAM2Tooltip=My param 2 tooltip
-
+CfdiImporterSetupPage = CFDI Importer setup page
+CFDIIMPORTER_PASSWORD = Electronic signature password
+CFDIIMPORTER_PASSWORDTooltip = SAT's electronic signature (e.firma) password
+ElectronicSignatureFiles = Electronic signature files
+UploadElectronicSignatureFiles = Upload Electronic signature files
 
 #
 # About page
