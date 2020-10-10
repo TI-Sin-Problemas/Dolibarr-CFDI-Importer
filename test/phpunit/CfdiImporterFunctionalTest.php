@@ -17,8 +17,8 @@
  */
 
 /**
- * \file    test/phpunit/CfdiBulkLoadFunctionalTest.php
- * \ingroup cfdibulkload
+ * \file    test/phpunit/CfdiImporterFunctionalTest.php
+ * \ingroup cfdiimporter
  * \brief   Example Selenium test.
  *
  * Put detailed description here.
@@ -29,7 +29,7 @@ namespace test\functional;
 use PHPUnit_Extensions_Selenium2TestCase_WebDriverException;
 
 /**
- * Class CfdiBulkLoadFunctionalTest
+ * Class CfdiImporterFunctionalTest
  *
  * Requires chromedriver for Google Chrome
  * Requires geckodriver for Mozilla Firefox
@@ -39,9 +39,9 @@ use PHPUnit_Extensions_Selenium2TestCase_WebDriverException;
  * @todo Windows support (IE, Google Chrome, Mozilla Firefox, Safari)
  * @todo OSX support (Safari, Google Chrome, Mozilla Firefox)
  *
- * @package Testcfdibulkload
+ * @package Testcfdiimporter
  */
-class CfdiBulkLoadFunctionalTest extends \PHPUnit_Extensions_Selenium2TestCase
+class CfdiImporterFunctionalTest extends \PHPUnit_Extensions_Selenium2TestCase
 {
 	// TODO: move to a global configuration file?
 	/** @var string Base URL of the webserver under test */
@@ -172,16 +172,16 @@ class CfdiBulkLoadFunctionalTest extends \PHPUnit_Extensions_Selenium2TestCase
 	{
 		$this->url('/admin/modules.php');
 		$this->authenticate();
-		$module_status_image_path = '//a[contains(@href, "'.self::$module_id.'")]/img';
+		$module_status_image_path = '//a[contains(@href, "' . self::$module_id . '")]/img';
 		$module_status_image = $this->byXPath($module_status_image_path);
 		if (strstr($module_status_image->attribute('src'), 'switch_off.png')) {
 			// Enable the module
-			$this->byHref('modCfdiBulkLoad')->click();
+			$this->byHref('modCfdiImporter')->click();
 		} else {
 			// Disable the module
-			$this->byHref('modCfdiBulkLoad')->click();
+			$this->byHref('modCfdiImporter')->click();
 			// Reenable the module
-			$this->byHref('modCfdiBulkLoad')->click();
+			$this->byHref('modCfdiImporter')->click();
 		}
 		// Page reloaded, we need a new Xpath
 		$module_status_image = $this->byXPath($module_status_image_path);
@@ -196,9 +196,9 @@ class CfdiBulkLoadFunctionalTest extends \PHPUnit_Extensions_Selenium2TestCase
 	 */
 	public function testConfigurationPage()
 	{
-		$this->url('/custom/cfdibulkload/admin/setup.php');
+		$this->url('/custom/cfdiimporter/admin/setup.php');
 		$this->authenticate();
-		return $this->assertContains('cfdibulkload/admin/setup.php', $this->url(), 'Configuration page');
+		return $this->assertContains('cfdiimporter/admin/setup.php', $this->url(), 'Configuration page');
 	}
 
 	/**
@@ -209,9 +209,9 @@ class CfdiBulkLoadFunctionalTest extends \PHPUnit_Extensions_Selenium2TestCase
 	 */
 	public function testAboutPage()
 	{
-		$this->url('/custom/cfdibulkload/admin/about.php');
+		$this->url('/custom/cfdiimporter/admin/about.php');
 		$this->authenticate();
-		return $this->assertContains('cfdibulkload/admin/about.php', $this->url(), 'About page');
+		return $this->assertContains('cfdiimporter/admin/about.php', $this->url(), 'About page');
 	}
 
 	/**
@@ -222,7 +222,7 @@ class CfdiBulkLoadFunctionalTest extends \PHPUnit_Extensions_Selenium2TestCase
 	 */
 	public function testAboutPageRendersMarkdownReadme()
 	{
-		$this->url('/custom/cfdibulkload/admin/about.php');
+		$this->url('/custom/cfdiimporter/admin/about.php');
 		$this->authenticate();
 		return $this->assertEquals(
 			'Dolibarr Module Template (aka My Module)',
@@ -241,7 +241,7 @@ class CfdiBulkLoadFunctionalTest extends \PHPUnit_Extensions_Selenium2TestCase
 	{
 		$this->url('/admin/boxes.php');
 		$this->authenticate();
-		return $this->assertContains('cfdibulkloadwidget1', $this->source(), "Box enabled");
+		return $this->assertContains('cfdiimporterwidget1', $this->source(), "Box enabled");
 	}
 
 	/**
@@ -255,7 +255,7 @@ class CfdiBulkLoadFunctionalTest extends \PHPUnit_Extensions_Selenium2TestCase
 		$this->url('/admin/triggers.php');
 		$this->authenticate();
 		return $this->assertContains(
-			'interface_99_modCfdiBulkLoad_CfdiBulkLoadTriggers.class.php',
+			'interface_99_modCfdiImporter_CfdiImporterTriggers.class.php',
 			$this->byTag('body')->text(),
 			"Trigger declared"
 		);
@@ -273,7 +273,7 @@ class CfdiBulkLoadFunctionalTest extends \PHPUnit_Extensions_Selenium2TestCase
 		$this->authenticate();
 		return $this->assertContains(
 			'tick.png',
-			$this->byXPath('//td[text()="interface_99_modCfdiBulkLoad_MyTrigger.class.php"]/following::img')->attribute('src'),
+			$this->byXPath('//td[text()="interface_99_modCfdiImporter_MyTrigger.class.php"]/following::img')->attribute('src'),
 			"Trigger enabled"
 		);
 	}

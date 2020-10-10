@@ -21,12 +21,12 @@
  */
 
 /**
- * \file       htdocs/core/modules/cfdibulkload/mod_myobject_advanced.php
- * \ingroup    cfdibulkload
+ * \file       htdocs/core/modules/cfdiimporter/mod_myobject_advanced.php
+ * \ingroup    cfdiimporter
  * \brief      File containing class for advanced numbering model of MyObject
  */
 
-dol_include_once('/cfdibulkload/core/modules/cfdibulkload/modules_myobject.php');
+dol_include_once('/cfdiimporter/core/modules/cfdiimporter/modules_myobject.php');
 
 
 /**
@@ -64,11 +64,11 @@ class mod_myobject_advanced extends ModeleNumRefMyObject
 
 		$form = new Form($db);
 
-		$texte = $langs->trans('GenericNumRefModelDesc')."<br>\n";
-		$texte .= '<form action="'.$_SERVER["PHP_SELF"].'" method="POST">';
-		$texte .= '<input type="hidden" name="token" value="'.newToken().'">';
+		$texte = $langs->trans('GenericNumRefModelDesc') . "<br>\n";
+		$texte .= '<form action="' . $_SERVER["PHP_SELF"] . '" method="POST">';
+		$texte .= '<input type="hidden" name="token" value="' . newToken() . '">';
 		$texte .= '<input type="hidden" name="action" value="updateMask">';
-		$texte .= '<input type="hidden" name="maskconstBom" value="CFDIBULKLOAD_MYOBJECT_ADVANCED_MASK">';
+		$texte .= '<input type="hidden" name="maskconstBom" value="CFDIIMPORTER_MYOBJECT_ADVANCED_MASK">';
 		$texte .= '<table class="nobordernopadding" width="100%">';
 
 		$tooltip = $langs->trans("GenericMaskCodes", $langs->transnoentities("MyObject"), $langs->transnoentities("MyObject"));
@@ -78,10 +78,10 @@ class mod_myobject_advanced extends ModeleNumRefMyObject
 		$tooltip .= $langs->trans("GenericMaskCodes5");
 
 		// Parametrage du prefix
-		$texte .= '<tr><td>'.$langs->trans("Mask").':</td>';
-		$texte .= '<td class="right">'.$form->textwithpicto('<input type="text" class="flat" size="24" name="maskMyObject" value="'.$conf->global->CFDIBULKLOAD_MYOBJECT_ADVANCED_MASK.'">', $tooltip, 1, 1).'</td>';
+		$texte .= '<tr><td>' . $langs->trans("Mask") . ':</td>';
+		$texte .= '<td class="right">' . $form->textwithpicto('<input type="text" class="flat" size="24" name="maskMyObject" value="' . $conf->global->CFDIIMPORTER_MYOBJECT_ADVANCED_MASK . '">', $tooltip, 1, 1) . '</td>';
 
-		$texte .= '<td class="left" rowspan="2">&nbsp; <input type="submit" class="button" value="'.$langs->trans("Modify").'" name="Button"></td>';
+		$texte .= '<td class="left" rowspan="2">&nbsp; <input type="submit" class="button" value="' . $langs->trans("Modify") . '" name="Button"></td>';
 
 		$texte .= '</tr>';
 
@@ -113,8 +113,7 @@ class mod_myobject_advanced extends ModeleNumRefMyObject
 		/*$mysoc->code_client = $old_code_client;
 		$mysoc->typent_code = $old_code_type;*/
 
-		if (!$numExample)
-		{
+		if (!$numExample) {
 			$numExample = $langs->trans('NotConfigured');
 		}
 		return $numExample;
@@ -130,20 +129,19 @@ class mod_myobject_advanced extends ModeleNumRefMyObject
 	{
 		global $db, $conf;
 
-		require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
+		require_once DOL_DOCUMENT_ROOT . '/core/lib/functions2.lib.php';
 
 		// We get cursor rule
-		$mask = $conf->global->CFDIBULKLOAD_MYOBJECT_ADVANCED_MASK;
+		$mask = $conf->global->CFDIIMPORTER_MYOBJECT_ADVANCED_MASK;
 
-		if (!$mask)
-		{
+		if (!$mask) {
 			$this->error = 'NotConfigured';
 			return 0;
 		}
 
 		$date = $object->date;
 
-		$numFinal = get_next_value($db, $mask, 'cfdibulkload_myobject', 'ref', '', null, $date);
+		$numFinal = get_next_value($db, $mask, 'cfdiimporter_myobject', 'ref', '', null, $date);
 
 		return  $numFinal;
 	}

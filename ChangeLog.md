@@ -1,4 +1,4 @@
-# CHANGELOG CFDIBULKLOAD FOR [DOLIBARR ERP CRM](https://www.dolibarr.org)
+# CHANGELOG CFDIIMPORTER FOR [DOLIBARR ERP CRM](https://www.dolibarr.org)
 
 ## 1.0
 

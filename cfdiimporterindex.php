@@ -19,39 +19,44 @@
  */
 
 /**
- *	\file       cfdibulkload/cfdibulkloadindex.php
- *	\ingroup    cfdibulkload
- *	\brief      Home page of cfdibulkload top menu
+ *	\file       cfdiimporter/cfdiimporterindex.php
+ *	\ingroup    cfdiimporter
+ *	\brief      Home page of cfdiimporter top menu
  */
 
 // Load Dolibarr environment
 $res = 0;
 // Try main.inc.php into web root known defined into CONTEXT_DOCUMENT_ROOT (not always defined)
-if (!$res && !empty($_SERVER["CONTEXT_DOCUMENT_ROOT"])) $res = @include $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/main.inc.php";
+if (!$res && !empty($_SERVER["CONTEXT_DOCUMENT_ROOT"])) $res = @include $_SERVER["CONTEXT_DOCUMENT_ROOT"] . "/main.inc.php";
 // Try main.inc.php into web root detected using web root calculated from SCRIPT_FILENAME
-$tmp = empty($_SERVER['SCRIPT_FILENAME']) ? '' : $_SERVER['SCRIPT_FILENAME']; $tmp2 = realpath(__FILE__); $i = strlen($tmp) - 1; $j = strlen($tmp2) - 1;
-while ($i > 0 && $j > 0 && isset($tmp[$i]) && isset($tmp2[$j]) && $tmp[$i] == $tmp2[$j]) { $i--; $j--; }
-if (!$res && $i > 0 && file_exists(substr($tmp, 0, ($i + 1))."/main.inc.php")) $res = @include substr($tmp, 0, ($i + 1))."/main.inc.php";
-if (!$res && $i > 0 && file_exists(dirname(substr($tmp, 0, ($i + 1)))."/main.inc.php")) $res = @include dirname(substr($tmp, 0, ($i + 1)))."/main.inc.php";
+$tmp = empty($_SERVER['SCRIPT_FILENAME']) ? '' : $_SERVER['SCRIPT_FILENAME'];
+$tmp2 = realpath(__FILE__);
+$i = strlen($tmp) - 1;
+$j = strlen($tmp2) - 1;
+while ($i > 0 && $j > 0 && isset($tmp[$i]) && isset($tmp2[$j]) && $tmp[$i] == $tmp2[$j]) {
+	$i--;
+	$j--;
+}
+if (!$res && $i > 0 && file_exists(substr($tmp, 0, ($i + 1)) . "/main.inc.php")) $res = @include substr($tmp, 0, ($i + 1)) . "/main.inc.php";
+if (!$res && $i > 0 && file_exists(dirname(substr($tmp, 0, ($i + 1))) . "/main.inc.php")) $res = @include dirname(substr($tmp, 0, ($i + 1))) . "/main.inc.php";
 // Try main.inc.php using relative path
 if (!$res && file_exists("../main.inc.php")) $res = @include "../main.inc.php";
 if (!$res && file_exists("../../main.inc.php")) $res = @include "../../main.inc.php";
 if (!$res && file_exists("../../../main.inc.php")) $res = @include "../../../main.inc.php";
 if (!$res) die("Include of main fails");
 
-require_once DOL_DOCUMENT_ROOT.'/core/class/html.formfile.class.php';
+require_once DOL_DOCUMENT_ROOT . '/core/class/html.formfile.class.php';
 
 // Load translation files required by the page
-$langs->loadLangs(array("cfdibulkload@cfdibulkload"));
+$langs->loadLangs(array("cfdiimporter@cfdiimporter"));
 
 $action = GETPOST('action', 'alpha');
 
 
 // Security check
-//if (! $user->rights->cfdibulkload->myobject->read) accessforbidden();
+//if (! $user->rights->cfdiimporter->myobject->read) accessforbidden();
 $socid = GETPOST('socid', 'int');
-if (isset($user->socid) && $user->socid > 0)
-{
+if (isset($user->socid) && $user->socid > 0) {
 	$action = '';
 	$socid = $user->socid;
 }
@@ -74,16 +79,16 @@ $now = dol_now();
 $form = new Form($db);
 $formfile = new FormFile($db);
 
-llxHeader("", $langs->trans("CfdiBulkLoadArea"));
+llxHeader("", $langs->trans("CfdiImporterArea"));
 
-print load_fiche_titre($langs->trans("CfdiBulkLoadArea"), '', 'cfdibulkload.png@cfdibulkload');
+print load_fiche_titre($langs->trans("CfdiImporterArea"), '', 'cfdiimporter.png@cfdiimporter');
 
 print '<div class="fichecenter"><div class="fichethirdleft">';
 
 
 /* BEGIN MODULEBUILDER DRAFT MYOBJECT
 // Draft MyObject
-if (! empty($conf->cfdibulkload->enabled) && $user->rights->cfdibulkload->read)
+if (! empty($conf->cfdiimporter->enabled) && $user->rights->cfdiimporter->read)
 {
 	$langs->load("orders");
 
@@ -169,7 +174,7 @@ $max = 3;
 
 /* BEGIN MODULEBUILDER LASTMODIFIED MYOBJECT
 // Last modified myobject
-if (! empty($conf->cfdibulkload->enabled) && $user->rights->cfdibulkload->read)
+if (! empty($conf->cfdiimporter->enabled) && $user->rights->cfdiimporter->read)
 {
 	$sql = "SELECT s.rowid, s.nom as name, s.client, s.datec, s.tms, s.canvas";
 	$sql.= ", s.code_client";

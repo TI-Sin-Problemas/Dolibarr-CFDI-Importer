@@ -22,7 +22,7 @@
 
 /**
  *      \file       htdocs/modulebuilder/tempalte/admin/myobject_extrafields.php
- *		\ingroup    cfdibulkload
+ *		\ingroup    cfdiimporter
  *		\brief      Page to setup extra fields of myobject
  */
 
@@ -43,7 +43,7 @@ foreach ($tmptype2label as $key => $val) $type2label[$key] = $langs->transnoenti
 
 $action = GETPOST('action', 'alpha');
 $attrname = GETPOST('attrname', 'alpha');
-$elementtype = 'cfdibulkload_myobject'; //Must be the $table_element of the class that manage extrafield
+$elementtype = 'cfdiimporter_myobject'; //Must be the $table_element of the class that manage extrafield
 
 if (!$user->admin) accessforbidden();
 
@@ -61,14 +61,14 @@ require DOL_DOCUMENT_ROOT.'/core/actions_extrafields.inc.php';
  */
 
 
-llxHeader('', $langs->trans("CfdiBulkLoadSetup"), $help_url);
+llxHeader('', $langs->trans("CfdiImporterSetup"), $help_url);
 
 
 $linkback = '<a href="'.DOL_URL_ROOT.'/admin/modules.php?restore_lastsearch_values=1">'.$langs->trans("BackToModuleList").'</a>';
-print load_fiche_titre($langs->trans("CfdiBulkLoadSetup"), $linkback, 'title_setup');
+print load_fiche_titre($langs->trans("CfdiImporterSetup"), $linkback, 'title_setup');
 
 
-$head = cfdibulkloadAdminPrepareHead();
+$head = cfdiimporterAdminPrepareHead();
 
 dol_fiche_head($head, 'myobject_extrafields', $langs->trans("MyObjectExtraFields"), -1, 'account');
 
