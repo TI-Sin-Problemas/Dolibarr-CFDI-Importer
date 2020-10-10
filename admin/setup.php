@@ -1,6 +1,6 @@
 <?php
 /* Copyright (C) 2004-2017 Laurent Destailleur  <eldy@users.sourceforge.net>
- * Copyright (C) 2020 SuperAdmin
+ * Copyright (C) 2020 Alfredo Altamirano
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -64,7 +64,7 @@ $backtopage = GETPOST('backtopage', 'alpha');
 $value = GETPOST('value', 'alpha');
 
 $arrayofparameters = array(
-	'CFDIBULKLOAD_PASSWORD' => array('css' => '', 'enabled' => 1, 'input_type' => 'password'),
+	'CFDIIMPORTER_PASSWORD' => array('css' => '', 'enabled' => 1, 'input_type' => 'password'),
 );
 
 $error = 0;
@@ -206,7 +206,7 @@ $formFile = new FormFile($db);
 
 $dirmodels = array_merge(array('/'), (array) $conf->modules_parts['models']);
 
-$page_name = "CfdiBulkLoadSetup";
+$page_name = "CfdiImporterSetup";
 llxHeader('', $langs->trans($page_name));
 
 // Subheader
@@ -219,7 +219,7 @@ $head = cfdibulkloadAdminPrepareHead();
 dol_fiche_head($head, 'settings', '', -1, "cfdibulkload@cfdibulkload");
 
 // Setup page goes here
-echo '<span class="opacitymedium">' . $langs->trans("CfdiBulkLoadSetupPage") . '</span><br><br>';
+echo '<span class="opacitymedium">' . $langs->trans("CfdiImporterSetupPage") . '</span><br><br>';
 
 
 if ($action == 'edit') {
@@ -298,7 +298,7 @@ if ($action == 'edit') {
 			// File upload form
 			$formFile->form_attach_new_file(
 				$_SERVER["PHP_SELF"],
-				$langs->trans('UPLOAD_FIEL_FILES'),
+				$langs->trans('UploadElectronicSignatureFiles'),
 				0,
 				0,
 				1,
