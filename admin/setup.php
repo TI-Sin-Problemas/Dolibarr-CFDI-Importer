@@ -17,9 +17,9 @@
  */
 
 /**
- * \file    cfdibulkload/admin/setup.php
- * \ingroup cfdibulkload
- * \brief   CfdiBulkLoad setup page.
+ * \file    cfdiimporter/admin/setup.php
+ * \ingroup cfdiimporter
+ * \brief   CfdiImporter setup page.
  */
 
 // Load Dolibarr environment
@@ -46,13 +46,13 @@ global $langs, $user;
 
 // Libraries
 require_once DOL_DOCUMENT_ROOT . "/core/lib/admin.lib.php";
-require_once '../lib/cfdibulkload.lib.php';
+require_once '../lib/cfdiimporter.lib.php';
 //require_once "../class/myclass.class.php";
 require_once DOL_DOCUMENT_ROOT . '/core/class/html.formfile.class.php';
 require_once DOL_DOCUMENT_ROOT . '/core/lib/files.lib.php';
 
 // Translations
-$langs->loadLangs(array("admin", "cfdibulkload@cfdibulkload"));
+$langs->loadLangs(array("admin", "cfdiimporter@cfdiimporter"));
 
 // Access control
 if (!$user->admin) accessforbidden();
@@ -70,12 +70,12 @@ $arrayofparameters = array(
 $error = 0;
 $setupnotempty = 0;
 
-$upload_dir = DOL_DATA_ROOT . '/cfdibulkload/admin/cert';
+$upload_dir = DOL_DATA_ROOT . '/cfdiimporter/admin/cert';
 
 // Local variables
-$encryption_method = $conf->global->CFDIBULKLOAD_ENCRYPTION_METHOD;
+$encryption_method = $conf->global->CFDIIMPORTER_ENCRYPTION_METHOD;
 $encryption_key = $conf->file->instance_unique_id;
-$encryption_iv = hex2bin($conf->global->CFDIBULKLOAD_ENCRYPTION_IV);
+$encryption_iv = hex2bin($conf->global->CFDIIMPORTER_ENCRYPTION_IV);
 
 /*
  * Actions
@@ -124,7 +124,7 @@ if ($action == 'updateMask') {
 	$filefound = 0;
 	$dirmodels = array_merge(array('/'), (array) $conf->modules_parts['models']);
 	foreach ($dirmodels as $reldir) {
-		$file = dol_buildpath($reldir . "core/modules/cfdibulkload/doc/pdf_" . $modele . "_" . strtolower($tmpobjectkey) . ".modules.php", 0);
+		$file = dol_buildpath($reldir . "core/modules/cfdiimporter/doc/pdf_" . $modele . "_" . strtolower($tmpobjectkey) . ".modules.php", 0);
 		if (file_exists($file)) {
 			$filefound = 1;
 			$classname = "pdf_" . $modele;
@@ -182,13 +182,13 @@ elseif ($action == 'setdoc') {
 	// TODO Check if numbering module chosen can be activated
 	// by calling method canBeActivated
 	$tmpobjectkey = GETPOST('object');
-	$constforval = 'CFDIBULKLOAD_' . strtoupper($tmpobjectkey) . "_ADDON";
+	$constforval = 'CFDIIMPORTER_' . strtoupper($tmpobjectkey) . "_ADDON";
 	dolibarr_set_const($db, $constforval, $value, 'chaine', 0, '', $conf->entity);
 }
 
 // Delete files
 elseif ($action == 'delete') {
-	$file = DOL_DATA_ROOT . '/cfdibulkload/' . GETPOST('urlfile', 'alpha');
+	$file = DOL_DATA_ROOT . '/cfdiimporter/' . GETPOST('urlfile', 'alpha');
 	dol_delete_file($file);
 }
 
@@ -212,11 +212,11 @@ llxHeader('', $langs->trans($page_name));
 // Subheader
 $linkback = '<a href="' . ($backtopage ? $backtopage : DOL_URL_ROOT . '/admin/modules.php?restore_lastsearch_values=1') . '">' . $langs->trans("BackToModuleList") . '</a>';
 
-print load_fiche_titre($langs->trans($page_name), $linkback, 'object_cfdibulkload@cfdibulkload');
+print load_fiche_titre($langs->trans($page_name), $linkback, 'object_cfdiimporter@cfdiimporter');
 
 // Configuration header
-$head = cfdibulkloadAdminPrepareHead();
-dol_fiche_head($head, 'settings', '', -1, "cfdibulkload@cfdibulkload");
+$head = cfdiimporterAdminPrepareHead();
+dol_fiche_head($head, 'settings', '', -1, "cfdiimporter@cfdiimporter");
 
 // Setup page goes here
 echo '<span class="opacitymedium">' . $langs->trans("CfdiImporterSetupPage") . '</span><br><br>';
@@ -318,7 +318,7 @@ if ($action == 'edit') {
 }
 
 
-$moduledir = 'cfdibulkload';
+$moduledir = 'cfdiimporter';
 $myTmpObjects = array();
 $myTmpObjects['MyObject'] = array('includerefgeneration' => 0, 'includedocgeneration' => 0);
 
@@ -378,7 +378,7 @@ foreach ($myTmpObjects as $myTmpObjectKey => $myTmpObjectArray) {
 								print '</td>' . "\n";
 
 								print '<td class="center">';
-								$constforvar = 'CFDIBULKLOAD_' . strtoupper($myTmpObjectKey) . '_ADDON';
+								$constforvar = 'CFDIIMPORTER_' . strtoupper($myTmpObjectKey) . '_ADDON';
 								if ($conf->global->$constforvar == $file) {
 									print img_picto($langs->trans("Activated"), 'switch_on');
 								} else {
@@ -512,7 +512,7 @@ foreach ($myTmpObjects as $myTmpObjectKey => $myTmpObjectArray) {
 
 										// Default
 										print '<td class="center">';
-										$constforvar = 'CFDIBULKLOAD_' . strtoupper($myTmpObjectKey) . '_ADDON';
+										$constforvar = 'CFDIIMPORTER_' . strtoupper($myTmpObjectKey) . '_ADDON';
 										if ($conf->global->$constforvar == $name) {
 											print img_picto($langs->trans("Default"), 'on');
 										} else {

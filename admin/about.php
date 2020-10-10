@@ -17,9 +17,9 @@
  */
 
 /**
- * \file    cfdibulkload/admin/about.php
- * \ingroup cfdibulkload
- * \brief   About page of module CfdiBulkLoad.
+ * \file    cfdiimporter/admin/about.php
+ * \ingroup cfdiimporter
+ * \brief   About page of module CfdiImporter.
  */
 
 // Load Dolibarr environment
@@ -39,10 +39,10 @@ if (!$res) die("Include of main fails");
 // Libraries
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
-require_once '../lib/cfdibulkload.lib.php';
+require_once '../lib/cfdiimporter.lib.php';
 
 // Translations
-$langs->loadLangs(array("errors", "admin", "cfdibulkload@cfdibulkload"));
+$langs->loadLangs(array("errors", "admin", "cfdiimporter@cfdiimporter"));
 
 // Access control
 if (!$user->admin) accessforbidden();
@@ -65,20 +65,20 @@ $backtopage = GETPOST('backtopage', 'alpha');
 
 $form = new Form($db);
 
-$page_name = "CfdiBulkLoadAbout";
+$page_name = "CfdiImporterAbout";
 llxHeader('', $langs->trans($page_name));
 
 // Subheader
 $linkback = '<a href="'.($backtopage ? $backtopage : DOL_URL_ROOT.'/admin/modules.php?restore_lastsearch_values=1').'">'.$langs->trans("BackToModuleList").'</a>';
 
-print load_fiche_titre($langs->trans($page_name), $linkback, 'object_cfdibulkload@cfdibulkload');
+print load_fiche_titre($langs->trans($page_name), $linkback, 'object_cfdiimporter@cfdiimporter');
 
 // Configuration header
-$head = cfdibulkloadAdminPrepareHead();
-dol_fiche_head($head, 'about', '', 0, 'cfdibulkload@cfdibulkload');
+$head = cfdiimporterAdminPrepareHead();
+dol_fiche_head($head, 'about', '', 0, 'cfdiimporter@cfdiimporter');
 
-dol_include_once('/cfdibulkload/core/modules/modCfdiBulkLoad.class.php');
-$tmpmodule = new modCfdiBulkLoad($db);
+dol_include_once('/cfdiimporter/core/modules/modCfdiImporter.class.php');
+$tmpmodule = new modCfdiImporter($db);
 print $tmpmodule->getDescLong();
 
 // Page end

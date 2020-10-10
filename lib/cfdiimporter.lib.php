@@ -16,9 +16,9 @@
  */
 
 /**
- * \file    cfdibulkload/lib/cfdibulkload.lib.php
- * \ingroup cfdibulkload
- * \brief   Library files with common functions for CfdiBulkLoad
+ * \file    cfdiimporter/lib/cfdiimporter.lib.php
+ * \ingroup cfdiimporter
+ * \brief   Library files with common functions for CfdiImporter
  */
 
 /**
@@ -26,28 +26,28 @@
  *
  * @return array
  */
-function cfdibulkloadAdminPrepareHead()
+function cfdiimporterAdminPrepareHead()
 {
 	global $langs, $conf;
 
-	$langs->load("cfdibulkload@cfdibulkload");
+	$langs->load("cfdiimporter@cfdiimporter");
 
 	$h = 0;
 	$head = array();
 
-	$head[$h][0] = dol_buildpath("/cfdibulkload/admin/setup.php", 1);
+	$head[$h][0] = dol_buildpath("/cfdiimporter/admin/setup.php", 1);
 	$head[$h][1] = $langs->trans("Settings");
 	$head[$h][2] = 'settings';
 	$h++;
 
 	/*
-	$head[$h][0] = dol_buildpath("/cfdibulkload/admin/myobject_extrafields.php", 1);
+	$head[$h][0] = dol_buildpath("/cfdiimporter/admin/myobject_extrafields.php", 1);
 	$head[$h][1] = $langs->trans("ExtraFields");
 	$head[$h][2] = 'myobject_extrafields';
 	$h++;
 	*/
 
-	$head[$h][0] = dol_buildpath("/cfdibulkload/admin/about.php", 1);
+	$head[$h][0] = dol_buildpath("/cfdiimporter/admin/about.php", 1);
 	$head[$h][1] = $langs->trans("About");
 	$head[$h][2] = 'about';
 	$h++;
@@ -55,12 +55,12 @@ function cfdibulkloadAdminPrepareHead()
 	// Show more tabs from modules
 	// Entries must be declared in modules descriptor with line
 	//$this->tabs = array(
-	//	'entity:+tabname:Title:@cfdibulkload:/cfdibulkload/mypage.php?id=__ID__'
+	//	'entity:+tabname:Title:@cfdiimporter:/cfdiimporter/mypage.php?id=__ID__'
 	//); // to add new tab
 	//$this->tabs = array(
-	//	'entity:-tabname:Title:@cfdibulkload:/cfdibulkload/mypage.php?id=__ID__'
+	//	'entity:-tabname:Title:@cfdiimporter:/cfdiimporter/mypage.php?id=__ID__'
 	//); // to remove a tab
-	complete_head_from_modules($conf, $langs, null, $head, $h, 'cfdibulkload');
+	complete_head_from_modules($conf, $langs, null, $head, $h, 'cfdiimporter');
 
 	return $head;
 }

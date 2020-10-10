@@ -17,10 +17,10 @@
 # Generic
 #
 
-# Module label 'ModuleCfdiBulkLoadName'
-ModuleCfdiBulkLoadName = CFDI Importer
-# Module description 'ModuleCfdiBulkLoadDesc'
-ModuleCfdiBulkLoadDesc = CFDI Importer allows you to import Online Digital Tax Receipts (CFDI) into Dolibarr from the Mexican Tax Administration Service (SAT) and automatically create Supplier Invoices from the imported documents
+# Module label 'ModuleCfdiImporterName'
+ModuleCfdiImporterName = CFDI Importer
+# Module description 'ModuleCfdiImporterDesc'
+ModuleCfdiImporterDesc = CFDI Importer allows you to import Online Digital Tax Receipts (CFDI) into Dolibarr from the Mexican Tax Administration Service (SAT) and automatically create Supplier Invoices from the imported documents
 
 #
 # Setup page
@@ -37,8 +37,8 @@ UploadElectronicSignatureFiles = Upload Electronic signature files
 # About page
 #
 About = About
-CfdiBulkLoadAbout = About CfdiBulkLoad
-CfdiBulkLoadAboutPage = CfdiBulkLoad about page
+CfdiImporterAbout = About CfdiImporter
+CfdiImporterAboutPage = CfdiImporter about page
 
 #
 # Sample page

@@ -1,11 +1,11 @@
-# CFDIBULKLOAD FOR [DOLIBARR ERP CRM](https://www.dolibarr.org)
+# CFDIIMPORTER FOR [DOLIBARR ERP CRM](https://www.dolibarr.org)
 
 ## Features
 
 Description...
 
 <!--
-![Screenshot cfdibulkload](img/screenshot_cfdibulkload.png?raw=true "CfdiBulkLoad"){imgmd}
+![Screenshot cfdiimporter](img/screenshot_cfdiimporter.png?raw=true "CfdiImporter"){imgmd}
 -->
 
 Other modules are available on [Dolistore.com](https://www.dolistore.com).
@@ -58,11 +58,11 @@ Note: If this screen tell you there is no custom directory, check your setup is 
 
 ### From a GIT repository
 
-- Clone the repository in ```$dolibarr_main_document_root_alt/cfdibulkload```
+- Clone the repository in ```$dolibarr_main_document_root_alt/cfdiimporter```
 
 ```sh
 cd ....../custom
-git clone git@github.com:gitlogin/cfdibulkload.git cfdibulkload
+git clone git@github.com:gitlogin/cfdiimporter.git cfdiimporter
 ```
 
 ### <a name="final_steps"></a>Final steps

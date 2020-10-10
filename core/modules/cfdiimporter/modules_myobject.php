@@ -23,13 +23,13 @@
  */
 
 /**
- *  \file			htdocs/core/modules/cfdibulkload/modules_myobject.php
- *  \ingroup		cfdibulkload
+ *  \file			htdocs/core/modules/cfdiimporter/modules_myobject.php
+ *  \ingroup		cfdiimporter
  *  \brief			File that contains parent class for myobjects document models and parent class for myobjects numbering models
  */
 
-require_once DOL_DOCUMENT_ROOT.'/core/class/commondocgenerator.class.php';
-require_once DOL_DOCUMENT_ROOT.'/compta/bank/class/account.class.php'; // required for use by classes that inherit
+require_once DOL_DOCUMENT_ROOT . '/core/class/commondocgenerator.class.php';
+require_once DOL_DOCUMENT_ROOT . '/compta/bank/class/account.class.php'; // required for use by classes that inherit
 
 
 /**
@@ -54,7 +54,7 @@ abstract class ModelePDFMyObject extends CommonDocGenerator
 		$type = 'myobject';
 		$list = array();
 
-		include_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
+		include_once DOL_DOCUMENT_ROOT . '/core/lib/functions2.lib.php';
 		$list = getListOfModels($db, $type, $maxfilenamelength);
 
 		return $list;
@@ -91,7 +91,7 @@ abstract class ModeleNumRefMyObject
 	public function info()
 	{
 		global $langs;
-		$langs->load("cfdibulkload@cfdibulkload");
+		$langs->load("cfdiimporter@cfdiimporter");
 		return $langs->trans("NoDescription");
 	}
 
@@ -103,7 +103,7 @@ abstract class ModeleNumRefMyObject
 	public function getExample()
 	{
 		global $langs;
-		$langs->load("cfdibulkload@cfdibulkload");
+		$langs->load("cfdiimporter@cfdiimporter");
 		return $langs->trans("NoExample");
 	}
 

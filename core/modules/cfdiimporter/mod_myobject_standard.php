@@ -18,11 +18,11 @@
  */
 
 /**
- *  \file       htdocs/core/modules/cfdibulkload/mod_myobject_standard.php
- *  \ingroup    cfdibulkload
+ *  \file       htdocs/core/modules/cfdiimporter/mod_myobject_standard.php
+ *  \ingroup    cfdiimporter
  *  \brief      File of class to manage MyObject numbering rules standard
  */
-dol_include_once('/cfdibulkload/core/modules/cfdibulkload/modules_myobject.php');
+dol_include_once('/cfdiimporter/core/modules/cfdiimporter/modules_myobject.php');
 
 
 /**
@@ -68,7 +68,7 @@ class mod_myobject_standard extends ModeleNumRefMyObject
 	 */
 	public function getExample()
 	{
-		return $this->prefix."0501-0001";
+		return $this->prefix . "0501-0001";
 	}
 
 
@@ -83,27 +83,28 @@ class mod_myobject_standard extends ModeleNumRefMyObject
 	{
 		global $conf, $langs, $db;
 
-		$coyymm = ''; $max = '';
+		$coyymm = '';
+		$max = '';
 
 		$posindice = strlen($this->prefix) + 6;
-		$sql = "SELECT MAX(CAST(SUBSTRING(ref FROM ".$posindice.") AS SIGNED)) as max";
-		$sql .= " FROM ".MAIN_DB_PREFIX."cfdibulkload_myobject";
-		$sql .= " WHERE ref LIKE '".$db->escape($this->prefix)."____-%'";
+		$sql = "SELECT MAX(CAST(SUBSTRING(ref FROM " . $posindice . ") AS SIGNED)) as max";
+		$sql .= " FROM " . MAIN_DB_PREFIX . "cfdiimporter_myobject";
+		$sql .= " WHERE ref LIKE '" . $db->escape($this->prefix) . "____-%'";
 		if ($object->ismultientitymanaged == 1) {
-			$sql .= " AND entity = ".$conf->entity;
-		}
-		elseif ($object->ismultientitymanaged == 2) {
+			$sql .= " AND entity = " . $conf->entity;
+		} elseif ($object->ismultientitymanaged == 2) {
 			// TODO
 		}
 
 		$resql = $db->query($sql);
-		if ($resql)
-		{
+		if ($resql) {
 			$row = $db->fetch_row($resql);
-			if ($row) { $coyymm = substr($row[0], 0, 6); $max = $row[0]; }
+			if ($row) {
+				$coyymm = substr($row[0], 0, 6);
+				$max = $row[0];
+			}
 		}
-		if ($coyymm && !preg_match('/'.$this->prefix.'[0-9][0-9][0-9][0-9]/i', $coyymm))
-		{
+		if ($coyymm && !preg_match('/' . $this->prefix . '[0-9][0-9][0-9][0-9]/i', $coyymm)) {
 			$langs->load("errors");
 			$this->error = $langs->trans('ErrorNumRefModel', $max);
 			return false;
@@ -124,25 +125,21 @@ class mod_myobject_standard extends ModeleNumRefMyObject
 
 		// first we get the max value
 		$posindice = strlen($this->prefix) + 6;
-		$sql = "SELECT MAX(CAST(SUBSTRING(ref FROM ".$posindice.") AS SIGNED)) as max";
-		$sql .= " FROM ".MAIN_DB_PREFIX."cfdibulkload_myobject";
-		$sql .= " WHERE ref LIKE '".$db->escape($this->prefix)."____-%'";
+		$sql = "SELECT MAX(CAST(SUBSTRING(ref FROM " . $posindice . ") AS SIGNED)) as max";
+		$sql .= " FROM " . MAIN_DB_PREFIX . "cfdiimporter_myobject";
+		$sql .= " WHERE ref LIKE '" . $db->escape($this->prefix) . "____-%'";
 		if ($object->ismultientitymanaged == 1) {
-			$sql .= " AND entity = ".$conf->entity;
-		}
-		elseif ($object->ismultientitymanaged == 2) {
+			$sql .= " AND entity = " . $conf->entity;
+		} elseif ($object->ismultientitymanaged == 2) {
 			// TODO
 		}
 
 		$resql = $db->query($sql);
-		if ($resql)
-		{
+		if ($resql) {
 			$obj = $db->fetch_object($resql);
 			if ($obj) $max = intval($obj->max);
 			else $max = 0;
-		}
-		else
-		{
+		} else {
 			dol_syslog("mod_myobject_standard::getNextValue", LOG_DEBUG);
 			return -1;
 		}
@@ -154,7 +151,7 @@ class mod_myobject_standard extends ModeleNumRefMyObject
 		if ($max >= (pow(10, 4) - 1)) $num = $max + 1; // If counter > 9999, we do not format on 4 chars, we take number as it is
 		else $num = sprintf("%04s", $max + 1);
 
-		dol_syslog("mod_myobject_standard::getNextValue return ".$this->prefix.$yymm."-".$num);
-		return $this->prefix.$yymm."-".$num;
+		dol_syslog("mod_myobject_standard::getNextValue return " . $this->prefix . $yymm . "-" . $num);
+		return $this->prefix . $yymm . "-" . $num;
 	}
 }
